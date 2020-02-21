@@ -26,7 +26,7 @@ By clicking on toolbar you can select the next step in the notebook. You need to
 <img src="https://raw.githubusercontent.com/mljar/mljar-studio/master/misc/low_code_2.png" width="90%" />
 </p>
 
-After filling all inputs you will have code generated. After clicking `Add to script` the code will be added to the notebook and executed. (All neeeded imports will be instered to the code.)
+After filling all inputs you will have code generated. After clicking `Add to script` the code will be added to the notebook and executed. (All needed imports will be inserted to the code.)
 
 <p align="center" >
 <img src="https://raw.githubusercontent.com/mljar/mljar-studio/master/misc/low_code_3.png" width="90%" />
