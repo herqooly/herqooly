@@ -8,18 +8,23 @@ MLJAR Studio is an Interactive Computing Platform for Humans.
 </p>
 
 
-## Features
+## Main Features
 
 #### Low code
 
+Each cell (when focused) has a toolbar.
 
 <p align="center" >
 <img src="https://raw.githubusercontent.com/mljar/mljar-studio/master/misc/low_code_1.png" width="90%" />
 </p>
 
+By clicking on toolbar you can select the next step in the notebook. You need to define the step in the modal.
+
 <p align="center" >
 <img src="https://raw.githubusercontent.com/mljar/mljar-studio/master/misc/low_code_2.png" width="90%" />
 </p>
+
+After filling all inputs you will have code generated. After clicking `Add to script` the code will be added to the notebook and executed. (All neeeded imports will be instered to the code.)
 
 <p align="center" >
 <img src="https://raw.githubusercontent.com/mljar/mljar-studio/master/misc/low_code_3.png" width="90%" />
@@ -31,14 +36,26 @@ MLJAR Studio is an Interactive Computing Platform for Humans.
 
 #### Easy results sharing
 
+You can share notebook results by clicking `Share` button. (Only results will be shared, user will not see the code)
 <p align="center" >
 <img src="https://raw.githubusercontent.com/mljar/mljar-studio/master/misc/share_1.png" width="90%" />
 </p>
+
+Example of shared results. 
 
 <p align="center" >
 <img src="https://raw.githubusercontent.com/mljar/mljar-studio/master/misc/share_2.png" width="90%" />
 </p>
 
+Results can be embedded in external websites.
+
+#### Custom layout
+
+You can easily customize the layout of results with drag and drop interface.
+
+<p align="center" >
+<img src="https://raw.githubusercontent.com/mljar/mljar-studio/master/misc/layout_1.png" width="90%" />
+</p>
 
 #### Project based
 
