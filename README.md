@@ -8,6 +8,8 @@ MLJAR Studio is an Interactive Computing Platform for Humans.
 </p>
 
 
+
+
 ## Main Features
 
 #### Low code
@@ -65,6 +67,7 @@ Each project created in the studio has defined directory structure (similar to h
 <img src="https://raw.githubusercontent.com/mljar/mljar-studio/master/misc/project_based_1.png" width="90%" />
 </p>
 
+You see creenshots from Jupyter interface:
 
 <p align="center" >
 <img src="https://raw.githubusercontent.com/mljar/mljar-studio/master/misc/project_based_2.png" width="90%" />
@@ -75,6 +78,10 @@ Each project created in the studio has defined directory structure (similar to h
 <img src="https://raw.githubusercontent.com/mljar/mljar-studio/master/misc/project_based_3.png" width="90%" />
 </p>
 
+Each script created in the MLJAR Studio has corresponding files in:
+ 
+ - Jupyter Notebook format `*.ipnyb` file
+ - Python file `*.py` file 
 
 <p align="center" >
 <img src="https://raw.githubusercontent.com/mljar/mljar-studio/master/misc/project_based_4.png" width="90%" />
