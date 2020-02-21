@@ -3,9 +3,67 @@
 MLJAR Studio is an Interactive Computing Platform for Humans. 
 
 
-<p align="center">
-<img src="https://raw.githubusercontent.com/mljar/mljar-studio/master/misc/studio.png" width="100%" />
+<p align="center" >
+<img src="https://raw.githubusercontent.com/mljar/mljar-studio/master/misc/studio.png" width="90%" />
 </p>
+
+
+## Features
+
+#### Low code
+
+
+<p align="center" >
+<img src="https://raw.githubusercontent.com/mljar/mljar-studio/master/misc/low_code_1.png" width="90%" />
+</p>
+
+<p align="center" >
+<img src="https://raw.githubusercontent.com/mljar/mljar-studio/master/misc/low_code_2.png" width="90%" />
+</p>
+
+<p align="center" >
+<img src="https://raw.githubusercontent.com/mljar/mljar-studio/master/misc/low_code_3.png" width="90%" />
+</p>
+
+<p align="center" >
+<img src="https://raw.githubusercontent.com/mljar/mljar-studio/master/misc/low_code_4.png" width="90%" />
+</p>
+
+#### Easy results sharing
+
+<p align="center" >
+<img src="https://raw.githubusercontent.com/mljar/mljar-studio/master/misc/share_1.png" width="90%" />
+</p>
+
+<p align="center" >
+<img src="https://raw.githubusercontent.com/mljar/mljar-studio/master/misc/share_2.png" width="90%" />
+</p>
+
+
+#### Project based
+
+Each project created in the studio has defined directory structure (similar to https://github.com/drivendata/cookiecutter-data-science)
+
+<p align="center" >
+<img src="https://raw.githubusercontent.com/mljar/mljar-studio/master/misc/project_based_1.png" width="90%" />
+</p>
+
+
+<p align="center" >
+<img src="https://raw.githubusercontent.com/mljar/mljar-studio/master/misc/project_based_2.png" width="90%" />
+</p>
+
+
+<p align="center" >
+<img src="https://raw.githubusercontent.com/mljar/mljar-studio/master/misc/project_based_3.png" width="90%" />
+</p>
+
+
+<p align="center" >
+<img src="https://raw.githubusercontent.com/mljar/mljar-studio/master/misc/project_based_4.png" width="90%" />
+</p>
+
+
 
 
 ## Run in docker-compose
