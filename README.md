@@ -3,6 +3,9 @@
 MLJAR Studio is an Interactive Computing Platform for Humans. 
 
 
+<p align="center">
+<img src="https://raw.githubusercontent.com/mljar/mljar-studio/master/misc/studio.png" width="100%" />
+</p>
 
 
 ## Run in docker-compose
