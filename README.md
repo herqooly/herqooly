@@ -158,3 +158,7 @@ jupyter notebook  --no-browser --ip=* --port 8888 --NotebookApp.token=my_very_se
 ```
 http://localhost:3000/
 ```
+
+#### Warning
+
+This code is intended to run only locally. Please do not deploy to servers because of security issues.
