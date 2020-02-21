@@ -8,6 +8,7 @@ MLJAR Studio is an Interactive Computing Platform for Humans.
 </p>
 
 
+MLJAR Studio is using Jupyter Notebook server and the Django server to store needed information. The frontend is created in the React.
 
 
 ## Main Features
@@ -67,7 +68,7 @@ Each project created in the studio has defined directory structure (similar to h
 <img src="https://raw.githubusercontent.com/mljar/mljar-studio/master/misc/project_based_1.png" width="90%" />
 </p>
 
-You see creenshots from Jupyter interface:
+You see screenshots from Jupyter interface:
 
 <p align="center" >
 <img src="https://raw.githubusercontent.com/mljar/mljar-studio/master/misc/project_based_2.png" width="90%" />
