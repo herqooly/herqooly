@@ -1,0 +1,11 @@
+export const SET_CELL_LIST = "SET_CELL_LIST";
+
+export const DELETE_CELL = "DELETE_CELL";
+export const UPDATE_CELL_CODE = "UPDATE_CELL_CODE";
+export const UPDATE_CELL_STATE = "UPDATE_CELL_STATE";
+export const SET_FOCUS = "SET_FOCUS";
+export const ADD_CELL = "ADD_CELL";
+export const SET_MSG_ID_TO_CELL_ID = "SET_MSG_ID_TO_CELL_ID";
+export const CLEAR_MSG_ID_TO_CELL_ID = "CLEAR_MSG_ID_TO_CELL_ID";
+export const ADD_CELL_WITH_CODE = "ADD_CELL_WITH_CODE";
+export const SET_DATA_COLUMNS = "SET_DATA_COLUMNS";

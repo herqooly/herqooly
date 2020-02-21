@@ -1,0 +1,53 @@
+version: '2'
+
+services:
+    nginx:
+        restart: always
+        image: nginx:1.12-alpine
+        ports:
+            - 8000:8000
+        volumes:
+            - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+            - static_volume:/app/backend/server/django_static
+    client:
+        build:
+            context: .
+            dockerfile: ./docker/client/Dockerfile
+        restart: always
+        ports:
+            - 5001:5000
+        expose:
+            - 5000
+    wsgiserver:
+        extends:
+            file: docker-common.yml
+            service: backend
+        entrypoint: /app/docker/backend/wsgi-entrypoint.sh
+        volumes:
+            - static_volume:/app/backend/server/django_static
+        ports:
+            - 8003:8003
+        expose:
+            - 8003
+    #jupyter:
+    #    image: jupyter/scipy-notebook:17aba6048f44
+    #    ports:
+    #        - 8888:8888
+    #    expose:
+    #        - 8888
+    jupyter:
+        build:
+            context: .
+            dockerfile: ./docker/jupyter/Dockerfile
+        entrypoint: /app/docker/jupyter/entrypoint.sh
+        restart: always 
+        ports:
+            - 8888:8888
+        expose:
+            - 8888
+        #volumes:
+        #    - jupyter_volume:/app/sandbox
+
+volumes:
+    static_volume: {}
+    #jupyter_volume: {}

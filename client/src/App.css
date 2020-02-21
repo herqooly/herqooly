@@ -1,0 +1,405 @@
+/*
+* Top navigation
+* Hide default border to remove 1px line.
+*/
+
+/*
+* Sidebar
+*/
+
+/* Hide for mobile, show later */
+
+.rt-th {
+  background-color: #e5e5e5;
+}
+
+.ReactTable.-striped .rt-tr.-odd {
+  background: #fff;
+}
+
+.ReactTable .rt-tr:hover .rt-td {
+  background: #d4e9f7;
+}
+
+.brand-header {
+  color: #3498db;
+  font-family: ubuntu, Times New Roman, Times, serif;
+  font-size: 64px;
+  font-weight: bold;
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.hide-sidebar {
+  display: none;
+}
+
+.sidebar {
+  display: none;
+}
+@media (min-width: 768px) {
+  .sidebar {
+    position: absolute;
+
+    top: 50px;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    display: block;
+    padding: 0px;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    background-color: #f5f5f5;
+    border-right: 1px solid #eee;
+    width: 53px;
+  }
+}
+
+/*
+* Main content
+*/
+
+@media (min-width: 768px) {
+  .main {
+    padding-left: 58px !important;
+    margin-top: -1px;
+  }
+}
+
+
+.link-left {
+  color: #3498db;
+  font-size: 1em;
+}
+
+.icon-left {
+  font-size: 1.3em;
+  color: #1f74ad;
+  padding: 4px;
+}
+
+/*.nav-item-left {
+  padding-left: 10px;
+
+  margin-left: -20px;
+  margin-right: -24px;
+}*/
+/*
+.nav-item-active {
+  border-left: 5px solid #3498db;
+  padding-left: 12px;
+
+  margin-left: -20px;
+  margin-right: -24px;
+  background-color: #fafbfc;
+}*/
+
+.nav-item-left:hover {
+  background-color: #d4e9f7;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+  font-size: 14px;
+}
+body {
+  background-color: #fafbfc; /*#fafbfc;*/
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  font-size: 12px;
+  text-align: center;
+  /* Set the fixed height of the footer here */
+  height: 30px;
+  line-height: 30px; /* Vertically center the text there */
+  border-top: 1px solid #bbb;
+  background-color: #fff; /* #c8ccd0;*/
+
+  flex: 0 0 auto;
+  z-index: 3;
+  margin-top: 111px;
+}
+
+.mb-3,
+.my-3 {
+  margin-bottom: 1rem !important;
+}
+
+.btn-primary {
+  background-color: #3498db !important;
+  border-color: #3498db !important;
+}
+
+.btn-primary:hover {
+  background-color: #2283c3 !important;
+  border-color: #2283c3 !important;
+}
+
+
+.navbar {
+  background-color: #3498db;
+  height: 50px;
+  width: 100%;
+}
+
+
+.navbar-light .navbar-nav .nav-link {
+  color: #ffffff !important;
+  font-size: 14px !important;
+  font-weight: bold !important;
+}
+.navbar-light .navbar-brand {
+  color: #ffffff;
+  font-family: ubuntu, Times New Roman, Times, serif;
+  font-size: 19px;
+  font-weight: bold;
+}
+
+.mljar-navbar-brand {
+  color: #ffffff;
+  font-family: ubuntu, Times New Roman, Times, serif;
+  font-size: 19px;
+  font-weight: bold;
+}
+
+.mljar-navbar-brand:hover {
+  color: white;
+}
+
+.navbar-script {
+  background-color: #3498db;
+  height: 50px;
+  width: 100%;
+}
+
+.menu-button {
+  background-color: transparent;
+  border-radius: 25px;
+  border: 0px solid #3498db;
+  display: inline-block;
+  cursor: pointer;
+
+  font-weight: bold;
+  padding: 3px 8px;
+  text-decoration: none;
+  margin: 3px;
+}
+
+.dropdown-toggle {
+  background-color: transparent;
+  border-radius: 25px;
+  border: 0px solid #3498db;
+  display: inline-block;
+  cursor: pointer;
+
+  font-weight: bold;
+  padding: 3px 8px;
+  text-decoration: none;
+}
+
+.sugestion {
+  color: #3498db;
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+.status {
+  color: #21bb5f;
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+.react-grid-item {
+  border: 1px solid #aaaaaa;
+  border-radius: 4px;
+}
+
+.ace_hidden-cursors {
+  opacity: 0;
+}
+
+.modal-menu-button {
+  margin: 0px;
+  padding: 5px;
+  text-align: left;
+  color: #1f74ad;
+  background-color: transparent;
+  
+  border-color: transparent;
+}
+
+.modal-menu-button:hover {
+  background-color: #d4e9f7;
+  border-color: #d4e9f7;
+  color: #1f74ad;
+
+}
+
+/*hr {
+  border-top: 1px solid #3498db;
+}*/
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+body > .container {
+  padding: 60px 15px 0;
+}
+
+code {
+  font-size: 80%;
+}
+
+/*do not show double click to zoom out*/
+div.plotly-notifier {
+  visibility: hidden;
+}
+
+/****************************************************************** graph CSS */
+
+.projectdiv {
+  padding: 21px;
+  margin: 7px;
+
+  border: 1px solid #d4e9f7;
+  border-top: 4px solid #3498db;
+  background-color: #fff; /*#e8eef6;*/
+}
+
+.projectTitle {
+  font-size: 23px;
+}
+
+.projectSmallButtons {
+  color: #999999;
+}
+
+.Toastify__toast--success {
+  background: #28a745;
+}
+.Toastify__toast--error {
+  background: #dc3545;
+}
+.Toastify__toast--info {
+  background: #2283c3;
+}
+.Toastify__toast--warning {
+  background: #ffff99;
+  color: black
+}
+.Toastify__close-button--warning {
+  color: black
+}
+
+.block-ui-message {
+  font-size: 19px;
+  font-weight: bold;
+}
+.loading-bullet {
+  font-size: 2em;
+  color: #28a745;
+}
+
+.menudrop {
+  border-radius: 5px;
+  border-color: #28a745;
+  background-color: #28a745;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+  background-color: #d4e9f7;
+}
+
+/* Code mirror ***********/
+
+.CodeMirror {
+  border: 1px solid #eee;
+  height: auto;
+}
+
+.CodeMirror-scroll {
+  height: auto;
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+
+.cell-default {
+  margin-top: -1px;
+}
+
+.cell-focus-idle {
+  -webkit-box-shadow: 0px 0px 3px 3px rgba(0,0,0,0.4);
+  -moz-box-shadow: 0px 0px 3px 3px rgba(0,0,0,0.4);
+  box-shadow: 0px 0px 3px 3px rgba(0,0,0,0.4);
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+
+.cell-focus-busy {
+  -webkit-box-shadow: 0px 0px 3px 3px rgba(40, 167, 69,0.75);
+  -moz-box-shadow: 0px 0px 3px 3px rgba(40, 167, 69,0.75);
+  box-shadow: 0px 0px 3px 3px rgba(40, 167, 69,0.75);
+  margin-top: 7px;
+  margin-bottom: 7px;
+}
+
+.cell-submitted {
+  -webkit-box-shadow: 0px 0px 3px 3px rgba(252, 174, 6, 0.74);
+  -moz-box-shadow: 0px 0px 3px 3px rgba(252, 174, 6, 0.74);
+  box-shadow: 0px 0px 3px 3px rgba(252, 174, 6, 0.74);
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+
+.widget-focus-idle {
+  -webkit-box-shadow: 0px 0px 3px 3px rgba(0,0,0,0.4);
+  -moz-box-shadow: 0px 0px 3px 3px rgba(0,0,0,0.4);
+  box-shadow: 0px 0px 3px 3px rgba(0,0,0,0.4);
+
+}
+
+.widget-focus-busy {
+  -webkit-box-shadow: 0px 0px 3px 3px rgba(40, 167, 69,0.75);
+  -moz-box-shadow: 0px 0px 3px 3px rgba(40, 167, 69,0.75);
+  box-shadow: 0px 0px 3px 3px rgba(40, 167, 69,0.75);
+
+}
+
+.widget-submitted {
+  -webkit-box-shadow: 0px 0px 3px 3px rgba(252, 174, 6, 0.74);
+  -moz-box-shadow: 0px 0px 3px 3px rgba(252, 174, 6, 0.74);
+  box-shadow: 0px 0px 3px 3px rgba(252, 174, 6, 0.74);
+
+}
+
+/********* react grid layout ************/
+
+.react-grid-item.react-grid-placeholder {
+  background: #3498db;
+}
+
+.react-grid-drag-handle {
+  min-height: 8px;
+  background-color: #eff2f5;
+  /*position: absolute;
+  bottom: 0;*/
+  width: 100%;
+}
+
+.react-grid-drag-handle:hover {
+  background-color: #2283c3;
+  cursor: grabbing;
+}
+ 
