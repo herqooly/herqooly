@@ -223,14 +223,14 @@ const getDataColumnsCode =
   "for k__,v__ in names__.items():\n" +
   '    arrays__ = [var for var in dir() if isinstance(eval(var), v__) and not var.startswith("_")]\n' +
   '    if k__ != "DataFrame":\n' +
-  "        for a in arrays__:\n" +
-  '            cols__[a] = "{0} ({1})".format(a, k__)\n' +
+  "        for a__ in arrays__:\n" +
+  '            cols__[a__] = "{0} ({1})".format(a__, k__)\n' +
   "    else:\n" +
   "        for a in arrays__:\n" +
   "            for c in eval(a).columns:\n" +
   "                cols__['{0}[\"{1}\"]'.format(a, c)] = '{0}[\"{1}\"] ({2} {0})'.format(a, c, k__)\n" +
   "print(json.dumps(cols__))\n" +
-  "del cols__, names__, k__, v__, arrays__\n";
+  "del a__, cols__, names__, k__, v__, arrays__\n";
 
 export const getDataColumns = scriptId => (dispatch, getState) => {
   console.log(getDataColumnsCode);
