@@ -262,3 +262,19 @@ export const getLinks = scriptId => dispatch => {
       });
     });
 };
+
+export const onQueue = scriptId => (dispatch, getState) => {
+  axios
+    .post(`/api/v1/queue/${scriptId}`, {})
+    .then(res => {
+      console.log("On Queue");
+      console.log(res.data);
+    })
+    .catch(err => {
+      toast.error("On Queue problem. " + err, {
+        autoClose: 8000,
+        hideProgressBar: true,
+        newsetOnTop: true
+      });
+    });
+};

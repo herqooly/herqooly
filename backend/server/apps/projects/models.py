@@ -25,7 +25,7 @@ class Script(ProjectItemMixin):
 
 
 class Widget(ProjectItemMixin):
-    widgetUid = models.TextField()
+    widgetUid = models.TextField() # widgetUid and cellUid are the same
     widget_type = models.TextField()
     cellUid = models.TextField()
 

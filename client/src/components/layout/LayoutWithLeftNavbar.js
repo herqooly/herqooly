@@ -22,7 +22,8 @@ class LayoutWithLeftNavbar extends React.Component {
         "/" + organization.slug + "/project/" + project.id;
       const srcLink = projectDashboard + "/src";
       const filesLink = projectDashboard + "/uploaded";
-      //const mlLink = projectDashboard + "/ml";
+      const periodicLink = projectDashboard + "/periodic";
+      const secretsLink = projectDashboard + "/secrets";
 
       leftNav = (
         <div className="sidebar">
@@ -78,17 +79,16 @@ class LayoutWithLeftNavbar extends React.Component {
               </div>
             </Tooltip>
 
-            {/*
             <Tooltip
               placement="right"
-              overlay="Your Machine Learning models"
+              overlay="Periodic jobs"
               arrowContent={<div className="rc-tooltip-arrow-inner"></div>}
             >
               <div>
                 <NavItem className={"nav-item-left"}>
-                  <Link to={mlLink} className={"link-left nav-link"}>
+                  <Link to={periodicLink} className={"link-left nav-link"}>
                     <i
-                      className="fa fa-lg fa-flask icon-left"
+                      className="fa fa-lg fa-clock-o icon-left"
                       aria-hidden="true"
                     />
                   </Link>
@@ -98,20 +98,20 @@ class LayoutWithLeftNavbar extends React.Component {
 
             <Tooltip
               placement="right"
-              overlay="Files created in the project"
+              overlay="Secrets"
               arrowContent={<div className="rc-tooltip-arrow-inner"></div>}
             >
               <div>
                 <NavItem className={"nav-item-left"}>
-                  <Link to={filesLink} className={"link-left nav-link"}>
+                  <Link to={secretsLink} className={"link-left nav-link"}>
                     <i
-                      className="fa fa-lg fa-file-o icon-left"
+                      className="fa fa-lg fa-lock icon-left"
                       aria-hidden="true"
                     />
                   </Link>
                 </NavItem>
               </div>
-            </Tooltip>*/}
+            </Tooltip>
           </Nav>
         </div>
       );

@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     # apps
     "apps.accounts",
     "apps.projects",
+    # queue
+    "django_rq",
 ]
 
 REST_FRAMEWORK = {
@@ -135,3 +137,14 @@ STATIC_URL = '/django_static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+
+# Queue configuration
+
+RQ_QUEUES = {
+    'default': {
+        'HOST': 'localhost',
+        'PORT': 6379,
+        'DB': 0,
+    },
+}

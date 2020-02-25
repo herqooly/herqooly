@@ -310,6 +310,8 @@ class SaveScriptView(views.APIView):
         widgets = self.request.data.get("widgets", [])
 
         for _, widget in widgets.items():
+            if "widgetUid" not in widget:
+                continue
             if widget["widgetUid"] in current_widgets_map:
                 # do update
                 w = current_widgets_map[widget["widgetUid"]]
@@ -387,3 +389,18 @@ class FileViewSet(viewsets.ModelViewSet):
         except Exception as e:
             print(e)
             raise APIException(str(e))
+
+
+
+import django_rq
+
+
+from worker.worker import func3
+
+class QueueView(views.APIView):
+    def post(self, request, script_id, format=None):
+        print("Queue", script_id)
+        a = django_rq.enqueue(func3, {"script_id": int(script_id)})
+        print(a)
+
+        return Response({"msg": "ok boy"})

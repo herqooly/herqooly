@@ -10,6 +10,7 @@ from apps.projects.views import ScriptCellsViewSet
 from apps.projects.views import AppShareLinkViewSet
 from apps.projects.views import SharedWidgetsViewSet
 from apps.projects.views import FileViewSet
+from apps.projects.views import QueueView
 
 router = DefaultRouter(trailing_slash=False)
 router.register(
@@ -62,5 +63,10 @@ urlpatterns = [
         r"^api/v1/(?P<share_uid>.+)/shared$",
         SharedWidgetsViewSet.as_view(),
         name="shared",
+    ),
+    url(
+        r"^api/v1/queue/(?P<script_id>.+)$",
+        QueueView.as_view(),
+        name="queue",
     ),
 ]

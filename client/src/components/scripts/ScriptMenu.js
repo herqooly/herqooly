@@ -10,7 +10,8 @@ import {
   saveScript,
   getLinks,
   interruptKernel,
-  restartKernel
+  restartKernel,
+  onQueue
 } from "./ScriptActions";
 import { executeAllCells } from "./cells/CellsActions";
 import WebSocketContainer from "./wsContainer/WebSocketContainer";
@@ -28,15 +29,15 @@ class ScriptMenu extends Component {
 
     this.onStartClick();
 
-    this.saveScriptInterval = setInterval(
-      () => this.onSaveScript(false),
-      5 * 60000
-    ); // 5*60 seconds
+    //this.saveScriptInterval = setInterval(
+    //  () => this.onSaveScript(false),
+    //  5 * 60000
+    //); // 5*60 seconds
   }
 
   componentWillUnmount() {
-    clearInterval(this.saveScriptInterval);
-    this.onSaveScript(false);
+    //clearInterval(this.saveScriptInterval);
+    //this.onSaveScript(false);
   }
 
   onDeleteScript = () => {
@@ -70,6 +71,10 @@ class ScriptMenu extends Component {
       this.props.urlParams.projectId,
       this.props.urlParams.scriptId
     );
+  };
+
+  onQueue = () => {
+    this.props.onQueue(this.props.urlParams.scriptId);
   };
 
   onShareScript = () => {
@@ -186,6 +191,9 @@ class ScriptMenu extends Component {
             onClick={this.onShareScript}
           >
             <i className="fa fa-share-alt" aria-hidden="true" /> Share
+          </Button>{" "}
+          <Button color="primary" outline size="sm" onClick={this.onQueue}>
+            Queue
           </Button>
           {" | "}
           <b>Script: {title} </b>
@@ -248,5 +256,6 @@ export default connect(mapStateToProps, {
   getLinks,
   interruptKernel,
   restartKernel,
-  executeAllCells
+  executeAllCells,
+  onQueue
 })(withRouter(ScriptMenu));

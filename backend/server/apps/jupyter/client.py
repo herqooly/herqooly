@@ -5,10 +5,15 @@ import requests
 class JupyterClient:
     def __init__(self):
         self.jupyter_url = os.environ.get("JUPYTER_URL")
+        if self.jupyter_url is None:
+            self.jupyter_url = "localhost"
+
         if "localhost" not in self.jupyter_url:
             self.jupyter_url = "http://jupyter:8888"
         self.jupyter_token = os.environ.get("JUPYTER_TOKEN")
         self.headers = {"Authorization": "Token " + self.jupyter_token}
+
+        print(self.jupyter_url)
 
     def is_available(self):
 
