@@ -33,6 +33,7 @@ export default function widgetsReducer(state = initialState, action) {
         widgets: state.widgets
       };
     case UPDATE_WIDGETS_LAYOUT:
+      console.log("UPDATE WIDGET LAYOUT");
       const newLayout = action.payload;
       newLayout.forEach(element => {
         state.widgets[element.i].layout = element;

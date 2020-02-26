@@ -21,6 +21,7 @@ import ImageWidget from "./outputs/ImageWidget";
 import JSONWidget from "./outputs/JSONWidget";
 import PlotlyWidget from "./outputs/PlotlyWidget";
 import { ROW_GRID_HEIGHT } from "./Settings";
+import { isEmpty } from "../../../utils/Common";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 

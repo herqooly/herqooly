@@ -17,11 +17,14 @@ import { updateCellState } from "../cells/CellsActions";
 import { SET_MSG_ID_TO_CELL_ID } from "../cells/CellsTypes";
 import { SET_KERNEL_EXECUTION_STATE, SET_KERNEL } from "../ScriptTypes";
 
+import { setSecrets } from "../ScriptActions";
+
 export const WebSocketsMiddleware = (function() {
   let sockets = {};
 
   const onOpen = (ws, store, scriptId, host) => event => {
     store.dispatch(webSocketsActions.webSocketConnected(scriptId, host));
+    store.dispatch(setSecrets(scriptId));
   };
 
   const onClose = (ws, store, host, scriptId) => event => {

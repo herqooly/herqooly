@@ -19,12 +19,19 @@ import { isEmpty } from "../../utils/Common";
 import { showModal, hideModal } from "../../modals/ModalActions";
 import classnames from "classnames";
 
+import { getSecrets } from "../secrets/SecretActions";
+
 class ScriptMenu extends Component {
   componentDidMount() {
     this.props.getScript(
       this.props.urlParams.organizationSlug,
       this.props.urlParams.projectId,
       this.props.urlParams.scriptId
+    );
+
+    this.props.getSecrets(
+      this.props.urlParams.organizationSlug,
+      this.props.urlParams.projectId
     );
 
     this.onStartClick();
@@ -257,5 +264,6 @@ export default connect(mapStateToProps, {
   interruptKernel,
   restartKernel,
   executeAllCells,
-  onQueue
+  onQueue,
+  getSecrets
 })(withRouter(ScriptMenu));

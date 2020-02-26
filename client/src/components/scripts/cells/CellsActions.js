@@ -242,21 +242,13 @@ export const getDataColumns = scriptId => (dispatch, getState) => {
   dispatch(webSocketSend(scriptId, msg));
 };
 
-export const executeCode = code => (dispatch, getState) => {
-  /*  const cellArrayIndex = 0;
-
-  const { cells } = getState().cells;
-
-  dispatch(updateCellState(cellArrayIndex, "busy"));
-  dispatch(clearMsgIdToCellUid(cells[cellArrayIndex].cellUid));
-  dispatch(clearWidget(cells[cellArrayIndex].cellUid));
-
+export const executeCode = (scriptId, code) => (dispatch, getState) => {
   let msg = {
-    cellUid: cells[cellArrayIndex].cellUid,
+    cellUid: "special_arbitrary_code",
     code: code
   };
 
-  dispatch(webSocketSend(msg));*/
+  dispatch(webSocketSend(scriptId, msg));
 };
 
 export const clearMsgIdToCellUid = cellUid => dispatch => {

@@ -269,6 +269,9 @@ export const updateWidget = payload => (dispatch, getState) => {
   const { widgets } = getState().widgets;
   const cellUid = msgIdToCellUid[payload.parent_header.msg_id];
 
+  if (cellUid === "special_arbitrary_code") {
+    return;
+  }
   if (cellUid === "special_get_data_columns") {
     dispatch({
       type: SET_DATA_COLUMNS,

@@ -11,7 +11,9 @@ django.setup()
 from apps.projects.models import (
     Script,
     Widget,
+    Secret
 )
+from apps.projects.encrypt import str_decrypt
 import json
 
 import websocket
@@ -43,6 +45,11 @@ class Runner(object):
         widgets_objs = Widget.objects.filter(parent_script__id=self.script_id)
         self.widgets = {w.widgetUid: w for w in widgets_objs}
         
+        secret_objs = Secret.objects.filter(parent_project=self.script.parent_project)
+        self.code_with_secrets = ""
+        for s in secret_objs:
+            self.code_with_secrets = "{}=\"{}\"\n".format(s.key, str_decrypt(s.value))
+
 
     def update_widget(self, payload):
         print("Update widget")
@@ -115,6 +122,13 @@ class Runner(object):
     def on_open(self, ws):
         print("### OPEN ###")
         def run(*args):
+            
+            # insert secrets
+            if self.code_with_secrets != "":
+                msg = self.prepare_execute_request(self.code_with_secrets)
+                ws.send(json.dumps(msg))
+
+
             for i, cell in enumerate(self.cells):
                 print("-" * 33)
                 print(cell["code"])
@@ -164,10 +178,11 @@ def go_runner(script_id):
 
     try:
         runner = Runner(script_id)
-
+        if len(runner.cells) == 0:
+            return
 
         script_path = "sandbox/" + runner.script.parent_project.slug + "/src"
-        script_name = runner.script.slug + ".ipynb"
+        script_name = runner.script.slug + "_queue_runner.ipynb"
         script_path += "/" + script_name
         jc = JupyterClient()
         j_session = JupyterClient().start_session(path=script_path, name=script_name)
@@ -180,7 +195,7 @@ def go_runner(script_id):
 
         print(connection_url)
 
-        #websocket.enableTrace(True)
+        websocket.enableTrace(True)
         ws = websocket.WebSocketApp(
             connection_url,
             header=headers,

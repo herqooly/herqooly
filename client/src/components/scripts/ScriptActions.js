@@ -12,6 +12,8 @@ import {
   GET_LINKS
 } from "./ScriptTypes";
 
+import { executeCode } from "../scripts/cells/CellsActions";
+
 export const getScripts = (organizationSlug, projectId) => dispatch => {
   axios
     .get(`/api/v1/${organizationSlug}/${projectId}/scripts`)
@@ -139,6 +141,8 @@ export const startKernel = (
         type: SET_KERNEL,
         payload: { scriptId: scriptId, kernel: res.data }
       });
+
+      //dispatch(setSecrets(organizationSlug, projectId, scriptId));
     })
     .catch(err => {
       toast.error("Start kernel problem. " + err, {
@@ -197,6 +201,7 @@ export const restartKernel = (organizationSlug, projectId, scriptId) => (
     .then(res => {
       console.log("restart kernel");
       console.log(res.data);
+
       //dispatch({
       //  type: SET_KERNEL,
       //  payload: { scriptId: scriptId, kernel: res.data }
@@ -264,11 +269,13 @@ export const getLinks = scriptId => dispatch => {
 };
 
 export const onQueue = scriptId => (dispatch, getState) => {
+  console.log("onQueue");
+
   axios
     .post(`/api/v1/queue/${scriptId}`, {})
     .then(res => {
-      console.log("On Queue");
-      console.log(res.data);
+      //console.log("On Queue");
+      //console.log(res.data);
     })
     .catch(err => {
       toast.error("On Queue problem. " + err, {
@@ -277,4 +284,21 @@ export const onQueue = scriptId => (dispatch, getState) => {
         newsetOnTop: true
       });
     });
+};
+
+export const setSecrets = scriptId => (dispatch, getState) => {
+  console.log("Set secrets ...");
+
+  const { secrets } = getState().secrets;
+  console.log(secrets);
+  if (secrets.length === 0) {
+    return;
+  }
+  let code = "";
+  secrets.forEach(secret => {
+    code += `${secret.key}="${secret.secret_value}"\n`;
+  });
+  console.log(code);
+
+  dispatch(executeCode(scriptId, code));
 };
