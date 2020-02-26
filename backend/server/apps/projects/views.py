@@ -20,6 +20,7 @@ from apps.projects.models import (
     Widget,
     AppShareLink,
     File,
+    Secret
 )
 from apps.projects.serializers import (
     ProjectSerializer,
@@ -28,6 +29,7 @@ from apps.projects.serializers import (
     ScriptCellsSerializer,
     AppShareLinkSerializer,
     FileSerializer,
+    SecretSerializer
 )
 from apps.common.permissions import DummyPermission
 
@@ -404,3 +406,39 @@ class QueueView(views.APIView):
         print(a)
 
         return Response({"msg": "ok boy"})
+
+
+
+from apps.projects.encrypt import str_encrypt
+
+class SecretViewSet(viewsets.ModelViewSet):
+
+    serializer_class = SecretSerializer
+    queryset = Secret.objects.all()
+    permission_classes = (DummyPermission,)
+
+    def get_queryset(self):
+        project_id = self.kwargs.get("project_id")
+        return self.queryset.filter(parent_project__id=project_id)
+
+    def perform_create(self, serializer):
+        print("Secret create")
+        
+        with transaction.atomic():
+            project_id = self.kwargs.get("project_id")
+
+            print(self.kwargs, project_id)
+
+            value_encrypted = str_encrypt(
+                serializer.validated_data.get("value")
+            )
+            # Save instance to DB
+            del serializer.validated_data["value"]
+            instance = serializer.save(
+                value=value_encrypted,
+                created_by=1,
+                parent_organization_id=1,
+                parent_project_id=int(project_id)
+            )
+            print(value_encrypted)
+            print("Saved.")

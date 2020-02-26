@@ -11,6 +11,7 @@ from apps.projects.views import AppShareLinkViewSet
 from apps.projects.views import SharedWidgetsViewSet
 from apps.projects.views import FileViewSet
 from apps.projects.views import QueueView
+from apps.projects.views import SecretViewSet
 
 router = DefaultRouter(trailing_slash=False)
 router.register(
@@ -39,6 +40,12 @@ router.register(
 
 router.register(
     r"(?P<project_id>.+)/(?P<location>.+)/files", FileViewSet, basename="files",
+)
+
+router.register(
+    r"(?P<organization_slug>.+)/(?P<project_id>.+)/secrets",
+    SecretViewSet,
+    basename="secrets",
 )
 
 

@@ -8,6 +8,8 @@ import UploadFileModal from "./uploadFile/UploadFileModal";
 import ReadDataModal from "./codeGen/readData/ReadDataModal";
 import VisModal from "./codeGen/vis/VisModal";
 import WidgetsModal from "./codeGen/widgets/WidgetsModal";
+import AddSecretModal from "./addSecret/AddSecretModal";
+
 const MODAL_TYPES = {
   createProject: CreateProjectModal,
   createScript: CreateScriptModal,
@@ -15,7 +17,8 @@ const MODAL_TYPES = {
   upload: UploadFileModal,
   readData: ReadDataModal,
   vis: VisModal,
-  widgets: WidgetsModal
+  widgets: WidgetsModal,
+  addSecret: AddSecretModal
 };
 
 const mapStateToProps = state => ({

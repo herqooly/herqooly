@@ -117,3 +117,43 @@ class FileSerializer(serializers.ModelSerializer):
             "file_name",
             "file_size",
         )
+
+from apps.projects.encrypt import str_decrypt
+
+
+class SecretSerializer(serializers.ModelSerializer):
+    created_by_username = serializers.SerializerMethodField(read_only=True)
+    read_only_value = serializers.SerializerMethodField(read_only=True)
+    secret_value = serializers.SerializerMethodField(read_only=True)    
+
+    def get_created_by_username(self, project):
+        return "user"
+
+    def get_read_only_value(self, instance):
+        txt = str_decrypt(
+            instance.value
+        )  
+        return "*" * len(txt)
+        
+    def get_secret_value(self, instance):
+        return str_decrypt(
+            instance.value
+        )
+
+    class Meta:
+        model = models.Secret
+        read_only_fields = (
+            "id",
+            "created_by",
+            "created_at",
+            "updated_at",
+            "created_by_username",
+            "read_only_value",
+            "secret_value"
+        )
+        fields = read_only_fields + (
+            "key",
+            "value"
+        )
+
+        extra_kwargs = {"value": {"write_only": True}}

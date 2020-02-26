@@ -9,6 +9,8 @@ import wsReducer from "./components/scripts/wsContainer/WebSocketReducer";
 import widgetsReducer from "./components/scripts/widgets/WidgetsReducer";
 import uploadedReducer from "./components/fileUpload/FileUploadListReducer";
 import fileUploadModalReducer from "./modals/uploadFile/UploadFileModalReducer";
+import secretsReducer from "./components/secrets/SecretReducer";
+
 export default history =>
   combineReducers({
     router: connectRouter(history),
@@ -20,5 +22,6 @@ export default history =>
     ws: wsReducer,
     widgets: widgetsReducer,
     uploaded: uploadedReducer,
-    fileUpload: fileUploadModalReducer
+    fileUpload: fileUploadModalReducer,
+    secrets: secretsReducer
   });

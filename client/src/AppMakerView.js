@@ -15,6 +15,8 @@ import ProjectView from "./components/projects/ProjectView";
 import ScriptListView from "./components/scripts/ScriptListView";
 import ScriptView from "./components/scripts/ScriptView";
 import FileUploadListView from "./components/fileUpload/FileUploadListView";
+import SecretListView from "./components/secrets/SecretListView";
+
 class AppMakerView extends Component {
   render() {
     return (
@@ -50,6 +52,11 @@ class AppMakerView extends Component {
                 exact
                 path="/:organizationSlug/project/:projectId/uploaded"
                 component={requireServerConnection(FileUploadListView)}
+              />
+              <Route
+                exact
+                path="/:organizationSlug/project/:projectId/secrets"
+                component={requireServerConnection(SecretListView)}
               />
               <Route path="*" component={NotFoundView} />
             </Switch>

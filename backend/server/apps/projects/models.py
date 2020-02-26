@@ -61,3 +61,11 @@ class File(ProjectItemMixin):
     location = models.CharField(max_length=1024)
     file_name = models.CharField(max_length=256)  # file name from upload
     file_size = models.IntegerField()  # in B
+
+
+
+class Secret(ProjectItemMixin):
+
+    key = models.TextField()
+    value = models.TextField()
+    
