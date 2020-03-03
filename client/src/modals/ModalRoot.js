@@ -9,6 +9,8 @@ import ReadDataModal from "./codeGen/readData/ReadDataModal";
 import VisModal from "./codeGen/vis/VisModal";
 import WidgetsModal from "./codeGen/widgets/WidgetsModal";
 import AddSecretModal from "./addSecret/AddSecretModal";
+import AddPeriodicJob from "./setPeriodicJob/SetPeriodicJobModal";
+import SetPeriodicJobModal from "./setPeriodicJob/SetPeriodicJobModal";
 
 const MODAL_TYPES = {
   createProject: CreateProjectModal,
@@ -18,7 +20,8 @@ const MODAL_TYPES = {
   readData: ReadDataModal,
   vis: VisModal,
   widgets: WidgetsModal,
-  addSecret: AddSecretModal
+  addSecret: AddSecretModal,
+  setPeriodicJob: SetPeriodicJobModal
 };
 
 const mapStateToProps = state => ({

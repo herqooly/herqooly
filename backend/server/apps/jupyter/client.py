@@ -116,7 +116,7 @@ class JupyterClient:
         except Exception as e:
             print(e)
         return None
-    
+
     def interrupt_kernel(self, kernel_id):
         try:
             response = requests.post(
@@ -143,7 +143,7 @@ class JupyterClient:
 
     def start_session(self, path, name):
         data = {
-            "kernel": {"id": None, "name": "python3" },
+            "kernel": {"id": None, "name": "python3"},
             "name": name,
             "path": path,
             "type": "notebook",

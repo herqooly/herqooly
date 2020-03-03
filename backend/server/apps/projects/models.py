@@ -23,9 +23,11 @@ class Script(ProjectItemMixin):
     notebook_file = models.TextField(blank=True, null=True)
     script_file = models.TextField(blank=True, null=True)
 
+    interval = models.IntegerField(default=0)  # interval of repeat
+
 
 class Widget(ProjectItemMixin):
-    widgetUid = models.TextField() # widgetUid and cellUid are the same
+    widgetUid = models.TextField()  # widgetUid and cellUid are the same
     widget_type = models.TextField()
     cellUid = models.TextField()
 
@@ -63,9 +65,7 @@ class File(ProjectItemMixin):
     file_size = models.IntegerField()  # in B
 
 
-
 class Secret(ProjectItemMixin):
 
     key = models.TextField()
     value = models.TextField()
-    

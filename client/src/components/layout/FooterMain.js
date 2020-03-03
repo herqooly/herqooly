@@ -5,7 +5,7 @@ class FooterMain extends React.Component {
   render() {
     return (
       <footer className="footer">
-        <div>MLJAR Studio</div>
+        <div>Herqooly</div>
       </footer>
     );
   }
@@ -15,7 +15,4 @@ FooterMain.propTypes = {};
 
 const mapStateToProps = state => ({});
 
-export default connect(
-  mapStateToProps,
-  {}
-)(FooterMain);
+export default connect(mapStateToProps, {})(FooterMain);

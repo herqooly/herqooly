@@ -20,7 +20,7 @@ from apps.projects.models import (
     Widget,
     AppShareLink,
     File,
-    Secret
+    Secret,
 )
 from apps.projects.serializers import (
     ProjectSerializer,
@@ -29,7 +29,8 @@ from apps.projects.serializers import (
     ScriptCellsSerializer,
     AppShareLinkSerializer,
     FileSerializer,
-    SecretSerializer
+    SecretSerializer,
+    PeriodicJobSerializer,
 )
 from apps.common.permissions import DummyPermission
 
@@ -67,8 +68,8 @@ class ProjectViewSet(viewsets.ModelViewSet):
 
                 # just delete in the DB
                 # TODO add delete in jupyter
-                #jc = JupyterClient()
-                #if not jc.delete_project_directory(instance.slug):
+                # jc = JupyterClient()
+                # if not jc.delete_project_directory(instance.slug):
                 #    raise Exception("Cannot delete project directory in the Jupyter")
 
         except Exception as e:
@@ -197,8 +198,6 @@ class KernelView(views.APIView):
         if not action in ["start", "shutdown", "interrupt", "restart"]:
             return Response(status=status.HTTP_404_NOT_FOUND)
         kernel_id = self.request.data.get("kernelId")
-            
-            
 
         kernels_running = JupyterClient().get_kernels()
         if kernels_running is None:
@@ -206,9 +205,9 @@ class KernelView(views.APIView):
         for k in kernels_running:
             print("Running: {}".format(k["id"]))
 
-        #session = ScriptSession.objects.filter(
+        # session = ScriptSession.objects.filter(
         #    parent_project__id=project_id, parent_script__id=script_id
-        #)
+        # )
 
         if action == "start":
 
@@ -224,8 +223,11 @@ class KernelView(views.APIView):
             ses = JupyterClient().start_session(path=script_path, name=script_name)
             print("SESSION", ses)
             return Response(
-                    {"id": ses["kernel"]["id"], "execution_state": ses["kernel"]["execution_state"]}
-                )
+                {
+                    "id": ses["kernel"]["id"],
+                    "execution_state": ses["kernel"]["execution_state"],
+                }
+            )
             ###
 
         elif action == "shutdown":
@@ -393,11 +395,11 @@ class FileViewSet(viewsets.ModelViewSet):
             raise APIException(str(e))
 
 
-
 import django_rq
 
 
 from worker.worker import func3
+
 
 class QueueView(views.APIView):
     def post(self, request, script_id, format=None):
@@ -408,8 +410,8 @@ class QueueView(views.APIView):
         return Response({"msg": "ok boy"})
 
 
-
 from apps.projects.encrypt import str_encrypt
+
 
 class SecretViewSet(viewsets.ModelViewSet):
 
@@ -423,22 +425,100 @@ class SecretViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         print("Secret create")
-        
+
         with transaction.atomic():
             project_id = self.kwargs.get("project_id")
 
             print(self.kwargs, project_id)
 
-            value_encrypted = str_encrypt(
-                serializer.validated_data.get("value")
-            )
+            value_encrypted = str_encrypt(serializer.validated_data.get("value"))
             # Save instance to DB
             del serializer.validated_data["value"]
             instance = serializer.save(
                 value=value_encrypted,
                 created_by=1,
                 parent_organization_id=1,
-                parent_project_id=int(project_id)
+                parent_project_id=int(project_id),
             )
             print(value_encrypted)
             print("Saved.")
+
+
+import hashlib
+
+
+def get_job_id(script_id):
+    return hashlib.sha1(
+        json.dumps({"script_id": script_id}, sort_keys=True).encode()
+    ).hexdigest()
+
+
+from redis import Redis
+from rq.job import Job
+from rq.exceptions import NoSuchJobError
+from rq_scheduler import Scheduler
+from datetime import datetime
+
+
+class PeriodicJobViewSet(
+    mixins.RetrieveModelMixin,
+    mixins.ListModelMixin,
+    viewsets.GenericViewSet,
+    mixins.UpdateModelMixin,
+):
+
+    serializer_class = PeriodicJobSerializer
+    queryset = Script.objects.all()
+    permission_classes = (DummyPermission,)
+
+    def get_queryset(self):
+        project_id = self.kwargs.get("project_id")
+        return self.queryset.filter(parent_project__id=project_id)
+
+    def partial_update(self, request, *args, **kwargs):
+        print("PERFORM PARTIAL UPDATE !!!!!!!!")
+        response = super(PeriodicJobViewSet, self).partial_update(
+            request, *args, **kwargs
+        )
+
+        script = self.get_object()
+        print("------------>", script.interval)
+
+        # scheduler add or delete
+
+        print("scheduler !!!")
+
+        job_id = get_job_id(script.id)
+        scheduler = Scheduler("default", connection=Redis())
+
+        print("job_id", job_id)
+        job = None
+        try:
+            redis = Redis()
+            job = Job.fetch(job_id, connection=redis)
+            print("there is a job", job)
+
+            scheduler.cancel(job)
+            print("Cancel the job")
+
+        except NoSuchJobError as e:
+            job = None
+        finally:
+            job = None
+
+        if job is None and script.interval > 0:
+            print("Add for schedule ...")
+            scheduler.schedule(
+                scheduled_time=datetime.utcnow(),  # Time for first execution, in UTC timezone
+                func=func3,  # Function to be queued
+                args=[
+                    {"script_id": script.id}
+                ],  # Arguments passed into function when executed
+                id=job_id,
+                interval=script.interval,  # Time before the function is called again, in seconds
+                repeat=None,  # Repeat this number of times (None means repeat forever)
+                result_ttl=script.interval * 2,
+            )
+            #  do not set a result_ttl value or you set a value larger than the interval
+
+        return response

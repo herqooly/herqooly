@@ -12,6 +12,7 @@ from apps.projects.views import SharedWidgetsViewSet
 from apps.projects.views import FileViewSet
 from apps.projects.views import QueueView
 from apps.projects.views import SecretViewSet
+from apps.projects.views import PeriodicJobViewSet
 
 router = DefaultRouter(trailing_slash=False)
 router.register(
@@ -48,6 +49,11 @@ router.register(
     basename="secrets",
 )
 
+router.register(
+    r"(?P<organization_slug>.+)/(?P<project_id>.+)/periodic_jobs",
+    PeriodicJobViewSet,
+    basename="periodic_jobs",
+)
 
 urlpatterns = [
     url(r"^api/v1/", include(router.urls)),
@@ -71,9 +77,5 @@ urlpatterns = [
         SharedWidgetsViewSet.as_view(),
         name="shared",
     ),
-    url(
-        r"^api/v1/queue/(?P<script_id>.+)$",
-        QueueView.as_view(),
-        name="queue",
-    ),
+    url(r"^api/v1/queue/(?P<script_id>.+)$", QueueView.as_view(), name="queue",),
 ]

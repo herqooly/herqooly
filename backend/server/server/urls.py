@@ -13,6 +13,4 @@ urlpatterns += projects_urlpatters
 
 
 # add queue
-urlpatterns += [
-    path('django-rq/', include('django_rq.urls'))
-]
+urlpatterns += [path("django-rq/", include("django_rq.urls"))]

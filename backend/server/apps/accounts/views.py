@@ -12,14 +12,14 @@ class UserInfoView(views.APIView):
 
     def get(self, request):
 
-        url_arr = request.META['HTTP_REFERER'].split(":")
+        url_arr = request.META["HTTP_REFERER"].split(":")
         url = "http:" + url_arr[1] + ":8888"
         ws_url = url_arr[1][2:] + ":8888"
-        
+
         os.environ["JUPYTER_URL"] = url
         os.environ["JUPYTER_WS_URL"] = ws_url
         os.environ["JUPYTER_TOKEN"] = "my_very_secret_token"
-        
+
         print("JUPYTER URLs")
         print("REST API:", os.environ["JUPYTER_URL"])
         print("WS:", os.environ["JUPYTER_WS_URL"])

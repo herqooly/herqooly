@@ -132,19 +132,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'django_static')
-STATIC_URL = '/django_static/'
+STATIC_ROOT = os.path.join(BASE_DIR, "django_static")
+STATIC_URL = "/django_static/"
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URL = "/media/"
 
 
 # Queue configuration
 
 RQ_QUEUES = {
-    'default': {
-        'HOST': 'localhost',
-        'PORT': 6379,
-        'DB': 0,
-    },
+    "default": {"HOST": "localhost", "PORT": 6379, "DB": 0,},
 }

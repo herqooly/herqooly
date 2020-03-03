@@ -8,11 +8,7 @@ import django
 
 django.setup()
 
-from apps.projects.models import (
-    Script,
-    Widget,
-    Secret
-)
+from apps.projects.models import Script, Widget, Secret
 from apps.projects.encrypt import str_decrypt
 import json
 
@@ -44,12 +40,11 @@ class Runner(object):
             raise Exception("Script with id = {} does not exist.".format(script_id))
         widgets_objs = Widget.objects.filter(parent_script__id=self.script_id)
         self.widgets = {w.widgetUid: w for w in widgets_objs}
-        
+
         secret_objs = Secret.objects.filter(parent_project=self.script.parent_project)
         self.code_with_secrets = ""
         for s in secret_objs:
-            self.code_with_secrets = "{}=\"{}\"\n".format(s.key, str_decrypt(s.value))
-
+            self.code_with_secrets = '{}="{}"\n'.format(s.key, str_decrypt(s.value))
 
     def update_widget(self, payload):
         print("Update widget")
@@ -68,15 +63,24 @@ class Runner(object):
         elif payload["msg_type"] in ["execute_result", "display_data"]:
             if "application/vnd.plotly.v1+json" in payload["content"]["data"]:
                 w.widget_type = "plotly_widget"
-                w.data = json.dumps(payload["content"]["data"]["application/vnd.plotly.v1+json"])
+                w.data = json.dumps(
+                    payload["content"]["data"]["application/vnd.plotly.v1+json"]
+                )
                 w.save()
             elif "application/json" in payload["content"]["data"]:
                 w.widget_type = "json_widget"
-                w.data = json.dumps({"text": payload["content"]["data"]["application/json"]})
+                w.data = json.dumps(
+                    {"text": payload["content"]["data"]["application/json"]}
+                )
                 w.save()
             elif "image/png" in payload["content"]["data"]:
                 w.widget_type = "image_widget"
-                w.data = json.dumps({"data":payload["content"]["data"]["image/png"], "mediaType": "image/png"})
+                w.data = json.dumps(
+                    {
+                        "data": payload["content"]["data"]["image/png"],
+                        "mediaType": "image/png",
+                    }
+                )
                 w.save()
             elif "text/html" in payload["content"]["data"]:
                 w.widget_type = "html_widget"
@@ -88,8 +92,12 @@ class Runner(object):
                 w.save()
         elif payload["msg_type"] == "error":
             w.widget_type = "error_widget"
-            w.data = json.dumps({"text": payload["content"]["evalue"],
-                        "reason": payload["content"]["ename"]})
+            w.data = json.dumps(
+                {
+                    "text": payload["content"]["evalue"],
+                    "reason": payload["content"]["ename"],
+                }
+            )
             w.save()
         print("Updated.")
 
@@ -99,7 +107,6 @@ class Runner(object):
             if w.widget_type == "text_widget":
                 w.data = json.dumps({"text": ""})
                 w.save()
-            
 
     def prepare_execute_request(self, code):
         content = {"code": code, "silent": False}
@@ -121,13 +128,13 @@ class Runner(object):
 
     def on_open(self, ws):
         print("### OPEN ###")
+
         def run(*args):
-            
+
             # insert secrets
             if self.code_with_secrets != "":
                 msg = self.prepare_execute_request(self.code_with_secrets)
                 ws.send(json.dumps(msg))
-
 
             for i, cell in enumerate(self.cells):
                 print("-" * 33)
@@ -138,14 +145,14 @@ class Runner(object):
                         "msg_id"
                     ]  # needed to quit connection
                 self.msg_id_2_cell_uid[msg["header"]["msg_id"]] = cell["cellUid"]
-                
-                self.clear_widget(cell["cellUid"])    
+
+                self.clear_widget(cell["cellUid"])
                 ws.send(json.dumps(msg))
 
         thread.start_new_thread(run, ())
 
     def on_message(self, ws, message):
-        
+
         payload = json.loads(message)
         if payload["channel"] == "iopub":
             if payload["msg_type"] in [
@@ -171,7 +178,6 @@ class Runner(object):
 
     def on_close(self, ws):
         print("### Closed ###")
-
 
 
 def go_runner(script_id):
@@ -209,7 +215,12 @@ def go_runner(script_id):
 
         jc.shutdown_kernel(kernel["id"])
     except Exception as e:
-        raise Exception("Exception during executing script (id={}), details: {}".format(script_id, str(e)))
+        raise Exception(
+            "Exception during executing script (id={}), details: {}".format(
+                script_id, str(e)
+            )
+        )
+
 
 if __name__ == "__main__":
     print("Main runner here ...")

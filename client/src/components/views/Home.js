@@ -26,7 +26,7 @@ class Home extends Component {
     );
     return (
       <div className="container text-center">
-        <h2 className={"brand-header"}>mljar</h2>
+        <h2 className={"brand-header"}> Herqooly</h2>
         <h3> Your Programming Superpowers </h3>
         <div className="container-fluid">
           <Row>

@@ -51,7 +51,7 @@ class NavbarMain extends React.Component {
     return (
       <Navbar light expand="md" className="mb-3 align-items-baseline">
         <Link to="/" className="mljar-navbar-brand">
-          mljar
+          Herqooly
         </Link>
         <Collapse isOpen={this.state.isOpen} navbar>
           {isAuthenticated && (
