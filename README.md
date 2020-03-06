@@ -1,6 +1,6 @@
-# MLJAR Studio
+# Herqooly
 
-MLJAR Studio is an Interactive Computing Platform for Humans. 
+Convert Python Notebooks into Dashboards
 
 
 <p align="center" >
@@ -8,7 +8,7 @@ MLJAR Studio is an Interactive Computing Platform for Humans.
 </p>
 
 
-MLJAR Studio is using:
+Herqooly is using:
 
  - Jupyter Notebook server for computation
  - Django server to store needed information and manage the projects,
